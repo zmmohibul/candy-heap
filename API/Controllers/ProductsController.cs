@@ -1,5 +1,8 @@
+using System;
 using System.Threading.Tasks;
+using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,18 +12,43 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly IProductRepository _productRepository;
 
-        public ProductsController(DataContext context)
+        public ProductsController(IProductRepository productRepository)
         {
-            _context = context;
+            _productRepository = productRepository;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts([FromQuery] int typeId, [FromQuery] int brandId)
         {
-            var candies = await _context.Products.ToListAsync();
-            return Ok(candies);
+            Console.WriteLine(typeId);
+            Console.WriteLine(brandId);
+
+            if (typeId > 0 && brandId == 0)
+            {
+                return Ok(await _productRepository.GetProductByTypeId(typeId));
+            }
+            
+            if (typeId == 0 && brandId > 0)
+            {
+                return Ok(await _productRepository.GetProductByBrandId(brandId));
+            }
+            
+            if (typeId > 0 && brandId > 0)
+            {
+                return Ok(await _productRepository.GetProductByTypeAndBrandId(typeId, brandId));
+            }
+            
+            var products = await _productRepository.GetAllProducts();
+            return Ok(products);
+        }
+        
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            var product = await _productRepository.GetProductById(id);
+            return Ok(product);
         }
     }
 }
