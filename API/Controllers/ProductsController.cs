@@ -7,19 +7,19 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CandiesController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public CandiesController(DataContext context)
+        public ProductsController(DataContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCandies()
+        public async Task<IActionResult> GetAllProducts()
         {
-            var candies = await _context.Candies.ToListAsync();
+            var candies = await _context.Products.ToListAsync();
             return Ok(candies);
         }
     }
