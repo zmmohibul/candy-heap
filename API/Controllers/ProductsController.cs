@@ -14,12 +14,10 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
         private readonly IGenericRepository<Product> _genericProductRepository;
 
-        public ProductsController(IProductRepository productRepository, IGenericRepository<Product> genericProductRepository)
+        public ProductsController(IGenericRepository<Product> genericProductRepository)
         {
-            _productRepository = productRepository;
             _genericProductRepository = genericProductRepository;
         }
 
