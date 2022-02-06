@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top" ngxNavbarDynamicExpand
+>
+  <a class="navbar-brand" href="#">Bootstrap 4</a>
+  <button
+    (click)="collapse.toggle()"
+    class="navbar-toggler"
+    type="button"
+  >
+    <span
+      class="
+        navbar-toggler-icon
+        d-flex
+        align-items-center
+        justify-content-center
+      "
+    >
+    </span>
+  </button>
+  <ngx-navbar-collapse #collapse="ngxNavbarCollapse" id="main-nav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="btn nav-link" href="#"
+        >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link" href="#">Some very long Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link" href="#">Some very long Link</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="btn my-2 my-sm-0" href="#">Login</a>
+
+      </li>
+      <li class="nav-item">
+        <a class="btn my-2 my-sm-0" href="#">Sign Up</a>
+      </li>
+    </ul>
+  </ngx-navbar-collapse>
+</nav>
